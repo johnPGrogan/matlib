@@ -47,6 +47,14 @@ if(ischar(a))
     r=strcmp(a,b);
     return;
 end;
+if(isstring(a)) % string can be one string or string array
+    if(size(size(a))~=size(size(b))) return;end;
+    if(size(a)~=size(b)) return;end;
+    for i=1:prod(size(a))
+        if(~strcmp(a(i),b(i))) return;end;
+    end;
+    r=1;return;
+end;
 
 if(isa(a,'function_handle')) % compare the function names
     if(~equals(char(a), char(b))); return; end
